@@ -5,16 +5,19 @@ from app import db
 
 class Device(db.Model):
     _id_device = db.Column('id_device', db.Integer, primary_key=True)
-    _nom = db.Column(db.String(100))
-    _marque = db.Column(db.String(50))
-    _type = db.Column(db.String(200))
+    _nom = db.Column('nom', db.String(100))
+    _marque = db.Column('marque', db.String(50))
+    _type = db.Column('type', db.String(200))
+    _category_id = db.Column('category_id', db.Integer, db.ForeignKey('category.id_category'),
+                             nullable=False)
 
     # Un constructeur
-    def __init__(self, id_device: int, nom: str, marque: str, type: str):
+    def __init__(self, id_device: int, nom: str, marque: str, type: str, category_id: int):
         self._id_device = id_device
         self._nom = nom
         self._marque = marque
         self._type = type
+        self._category_id = category_id
 
     # accesseur et les mutateurs
     @property
