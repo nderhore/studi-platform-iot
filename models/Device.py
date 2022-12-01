@@ -1,7 +1,13 @@
 import json
 
+from app import db
 
-class Device:
+
+class Device(db.Model):
+    _id_device = db.Column('id_device', db.Integer, primary_key=True)
+    _nom = db.Column(db.String(100))
+    _marque = db.Column(db.String(50))
+    _type = db.Column(db.String(200))
 
     # Un constructeur
     def __init__(self, id_device: int, nom: str, marque: str, type: str):
