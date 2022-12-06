@@ -4,7 +4,8 @@ from app import db
 
 
 class Category(db.Model):
-    _id_category = db.Column('id_category', db.Integer, primary_key=True)
+    _id_category = db.Column('id_category', db.Integer, primary_key=True,
+                             autoincrement=True)
     _libelle = db.Column('libelle', db.String)
     _devices = db.relationship('Device')
 
@@ -12,6 +13,19 @@ class Category(db.Model):
         self._id_category = id_category
         self._libelle = libelle
         self._devices = devices
+
+    @property
+    def libelle(self):
+        return self._libelle
+
+    @libelle.setter
+    def libelle(self, libelle: str):
+        self._libelle = libelle
+
+    @property
+    def id_category(self):
+        return self._id_category
+
 
     def to_json(self):
         return self.__str__()

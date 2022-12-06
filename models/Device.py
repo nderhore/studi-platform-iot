@@ -4,7 +4,8 @@ from app import db
 
 
 class Device(db.Model):
-    _id_device = db.Column('id_device', db.Integer, primary_key=True)
+    _id_device = db.Column('id_device', db.Integer, primary_key=True,
+                           autoincrement=True)
     _nom = db.Column('nom', db.String(100))
     _marque = db.Column('marque', db.String(50))
     _type = db.Column('type', db.String(200))
@@ -48,6 +49,14 @@ class Device(db.Model):
     def marque(self, marque: str):
         self._marque = marque
 
+    @property
+    def category_id(self):
+        return self._category_id
+
+    @category_id.setter
+    def category_id(self, category_id: int):
+        self._category_id = category_id
+
     def to_json(self):
         return self.__str__()
 
@@ -71,4 +80,4 @@ class Device(db.Model):
         device_id: int = int(json_dct['id_device'])
         return Device(device_id,
                       json_dct['nom'], json_dct['marque'],
-                      json_dct['type'])
+                      json_dct['type'],json_dct['category_id'])
