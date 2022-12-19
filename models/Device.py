@@ -4,12 +4,13 @@ from app import db
 
 
 class Device(db.Model):
+    __tablename__ = "Device"
     _id_device = db.Column('id_device', db.Integer, primary_key=True,
                            autoincrement=True)
     _nom = db.Column('nom', db.String(100))
     _marque = db.Column('marque', db.String(50))
     _type = db.Column('type', db.String(200))
-    _category_id = db.Column('category_id', db.Integer, db.ForeignKey('category.id_category'),
+    _category_id = db.Column('category_id', db.Integer, db.ForeignKey('Category.id_category'),
                              nullable=False)
 
     # Un constructeur
@@ -24,6 +25,10 @@ class Device(db.Model):
     @property
     def id_device(self):
         return self._id_device
+
+    @id_device.setter
+    def id_device(self,id_device):
+        self._id_device = id_device
 
     @property
     def nom(self):
@@ -76,8 +81,9 @@ class Device(db.Model):
 
     @staticmethod
     def from_json(json_dct):
-        print(json_dct['id_device'])
-        device_id: int = int(json_dct['id_device'])
+        device_id = None
+        if json_dct.get('id_device'):
+            device_id: int = int(json_dct['id_device'])
         return Device(device_id,
-                      json_dct['nom'], json_dct['marque'],
-                      json_dct['type'],json_dct['category_id'])
+                      json_dct.get('nom'), json_dct.get('marque'),
+                      json_dct.get('type'),json_dct.get('category_id'))
