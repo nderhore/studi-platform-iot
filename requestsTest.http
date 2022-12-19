@@ -1,0 +1,28 @@
+http://localhost:5000/device/
+
+###
+
+POST http://localhost:5000/device/
+Content-Type: application/json
+{
+    "nom":"oldNom",
+    "marque":"titi",
+    "type":"unType",
+    "category_id":1
+}
+
+
+###
+PUT http://localhost:5000/device/1
+Content-Type: application/json
+{
+    "id_device":1,
+    "nom":"newNom",
+    "marque":"titi",
+    "type":"unType",
+    "category_id":1
+}
+
+###
+DELETE http://localhost:5000/device/1
+
