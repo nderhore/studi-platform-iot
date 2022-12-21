@@ -20,3 +20,5 @@ def authenticator():
         set_refresh_cookies(response, refresh_token)
         return response
     return json.dumps({'success': False}), 200, {'ContentType': 'application/json'}
+
+

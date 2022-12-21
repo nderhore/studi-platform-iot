@@ -7,13 +7,17 @@ from controller.CategoryWs import category_ws
 from controller.DeviceWs import device_ws
 from config.config import config
 from controller.LoginWs import login_ws
-
+from controller.LogoutWs import logout_ws
+from controller.UserWs import user_ws
 app = Flask(__name__)
 app.config.from_object(config)
 
 app.register_blueprint(device_ws)
 app.register_blueprint(category_ws)
 app.register_blueprint(login_ws)
+app.register_blueprint(logout_ws)
+app.register_blueprint(user_ws)
+
 
 #Configuration Token JWT
 app.config['JWT_SECRET_KEY'] = 'Studi'
@@ -24,6 +28,7 @@ app.config['JWT_TOKEN_LOCATION'] = ['cookies']
 
 db.init_app(app)
 jwt = JWTManager(app)
+
 with app.app_context():
     db.create_all()
 
